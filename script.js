@@ -400,3 +400,10 @@
                 listEl.appendChild(itemDiv);
             });
         } 
+
+        function clearLeaderboard() {
+            if (!window.confirm('هل أنت متأكد من حذف جميع النتائج المسجلة؟')) return;
+
+            localStorage.removeItem('shatby_leaderboard');
+            renderLeaderboardList();
+        }
