@@ -27,7 +27,7 @@
         <div id="screen-welcome" class="flex-1 flex flex-col items-center justify-between p-6 sm:p-10 text-center overflow-y-auto">
             <div class="my-auto flex flex-col items-center w-full max-w-sm">
                 <div class="w-28 h-28 sm:w-32 sm:h-32 bg-gradient-to-br from-emerald-500/20 to-emerald-600/10 border-2 border-emerald-500/40 rounded-full flex items-center justify-center mb-6 animate-float shadow-2xl shadow-emerald-950">
-                    <img src="icon.png" alt="" class="w-20 h-20 sm:w-24 sm:h-24 object-contain">
+                    <img src="icon.png" alt="" class="w-20 h-40 sm:w-24 sm:h-24 object-contain">
                 </div>
                 
                 <div class="inline-block bg-emerald-900/60 border border-emerald-500/40 px-4 py-1.5 rounded-full text-xs sm:text-sm text-emerald-300 font-bold mb-4 shadow-sm">
@@ -59,11 +59,11 @@
                     <i class="fa-solid fa-user-pen"></i>
                 </div>
                 <h2 class="text-2xl sm:text-3xl font-black text-white mb-2">أهلاً بك يا بطل!</h2>
-                <p class="text-slate-400 text-sm mb-6">الرجاء إدخال اسمك الكريم لتسجيله في لوحة الشرف</p>
+                <p class="text-slate-400 text-sm mb-6">الرجاء إدخال اسمك الكريم لتسجيله في الأختبار</p>
 
                 <div class="w-full text-right mb-4">
                     <label class="block text-xs font-bold text-emerald-400 mb-2 mr-1">الاسم الكريم:</label>
-                    <input type="text" id="player-name-input" placeholder="مثال: حمزة محمد" class="w-full px-4 py-4 bg-slate-900 border border-slate-800 rounded-2xl text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 text-base font-semibold shadow-inner">
+                    <input type="text" id="player-name-input" placeholder="مثال: حمزة محمد نعيم" class="w-full px-4 py-4 bg-slate-900 border border-slate-800 rounded-2xl text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 text-base font-semibold shadow-inner">
                     <p id="name-error" class="text-rose-400 text-xs mt-2 mr-1 hidden">الرجاء إدخال الاسم قبل بدء التحدي.</p>
                 </div>
             </div>
@@ -197,7 +197,7 @@
                 تأكيد الدخول
             </button>
         </div>
-
+        
         <!-- ==================== SCREEN 5: LEADERBOARD ==================== -->
         <div id="screen-leaderboard" class="flex-1 flex flex-col justify-between p-5 sm:p-6 overflow-hidden hidden">
             <div class="flex items-center justify-between mb-4">
@@ -216,9 +216,14 @@
                 <!-- Populated via JS -->
             </div>
 
-            <button onclick="closeLeaderboard()" class="w-full py-3.5 bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-200 font-bold rounded-xl transition cursor-pointer">
-                العودة
-            </button>
+            <div class="flex gap-2">
+                <button onclick="closeLeaderboard()" class="flex-1 py-3.5 bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-200 font-bold rounded-xl transition cursor-pointer">
+                    العودة
+                </button>
+                <button onclick="clearLeaderboard()" class="flex-1 py-3.5 bg-rose-950 hover:bg-rose-900 border border-rose-800 text-rose-200 font-bold rounded-xl transition cursor-pointer flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-trash-can" aria-hidden="true"></i> حذف النتائج
+                </button>
+            </div>
         </div>
 
     </div>
