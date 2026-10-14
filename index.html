@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>أختبار حلقة الأمام الشاطبي</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Cairo & Tajawal -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti CDN -->
+     <link rel="icon" href="icon.png">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="script-1.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="app" class="w-full h-full sm:max-w-lg sm:h-[90vh] sm:rounded-3xl bg-slate-950/95 backdrop-blur-2xl border-0 sm:border border-emerald-500/30 shadow-2xl flex flex-col justify-between overflow-hidden relative">
+        
+        <!-- Top Decorative Gradient Line -->
+        <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-emerald-400 via-amber-400 to-emerald-500 z-20"></div>
+
+        <!-- ==================== SCREEN 1: WELCOME ==================== -->
+        <div id="screen-welcome" class="flex-1 flex flex-col items-center justify-between p-6 sm:p-10 text-center overflow-y-auto">
+            <div class="my-auto flex flex-col items-center w-full max-w-sm">
+                <div class="w-28 h-28 sm:w-32 sm:h-32 bg-gradient-to-br from-emerald-500/20 to-emerald-600/10 border-2 border-emerald-500/40 rounded-full flex items-center justify-center mb-6 animate-float shadow-2xl shadow-emerald-950">
+                    <img src="icon.png" alt="" class="w-20 h-20 sm:w-24 sm:h-24 object-contain">
+                </div>
+                
+                <div class="inline-block bg-emerald-900/60 border border-emerald-500/40 px-4 py-1.5 rounded-full text-xs sm:text-sm text-emerald-300 font-bold mb-4 shadow-sm">
+                    حلقة القرآن الكريم
+                </div>
+
+                <h1 class="text-3xl sm:text-4xl font-black text-white mb-3 tracking-tight">
+                    حلقة الأمام الشاطبي
+                </h1>
+                <p class="text-slate-300 text-sm sm:text-base mb-8 leading-relaxed">
+                    مسابقة تفاعلية شاملة لعلوم القرآن الكريم، تهدف إلى تعزيز المعرفة الدينية وتشجيع الطلاب على التفاعل مع محتوى القرآن الكريم بطريقة ممتعة ومفيدة.
+                </p>
+            </div>
+
+            <div class="w-full max-w-sm space-y-3 pb-2">
+                <button onclick="goToNameScreen()" class="w-full py-4 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-white font-black text-lg rounded-2xl shadow-lg shadow-emerald-600/40 transform active:scale-95 transition-all flex items-center justify-center gap-3 cursor-pointer pulse-glow">
+                    <i class="fa-solid fa-play text-sm"></i> أبدا
+                </button>
+                <button onclick="promptLeaderboardPassword()" class="w-full py-3.5 bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-200 font-bold text-sm sm:text-base rounded-2xl transition-all flex items-center justify-center gap-2 cursor-pointer shadow">
+                    <i class="fa-solid fa-lock text-amber-400 text-sm"></i> لوحة الشرف
+                </button>
+            </div>
+        </div>
+
+        <!-- ==================== SCREEN 2: NAME INPUT ==================== -->
+        <div id="screen-name" class="flex-1 flex flex-col items-center justify-between p-6 sm:p-10 text-center overflow-y-auto hidden">
+            <div class="my-auto flex flex-col items-center w-full max-w-sm">
+                <div class="w-20 h-20 bg-emerald-500/10 border border-emerald-500/30 rounded-full flex items-center justify-center mb-5 text-emerald-400 text-3xl shadow">
+                    <i class="fa-solid fa-user-pen"></i>
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-black text-white mb-2">أهلاً بك يا بطل!</h2>
+                <p class="text-slate-400 text-sm mb-6">الرجاء إدخال اسمك الكريم لتسجيله في لوحة الشرف</p>
+
+                <div class="w-full text-right mb-4">
+                    <label class="block text-xs font-bold text-emerald-400 mb-2 mr-1">الاسم الكريم:</label>
+                    <input type="text" id="player-name-input" placeholder="مثال: حمزة محمد" class="w-full px-4 py-4 bg-slate-900 border border-slate-800 rounded-2xl text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 text-base font-semibold shadow-inner">
+                    <p id="name-error" class="text-rose-400 text-xs mt-2 mr-1 hidden">الرجاء إدخال الاسم قبل بدء التحدي.</p>
+                </div>
+            </div>
+
+            <div class="w-full max-w-sm flex gap-3 pb-2">
+                <button onclick="goBackToWelcome()" class="w-1/3 py-4 bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 font-bold rounded-2xl transition cursor-pointer">
+                    رجوع
+                </button>
+                <button onclick="startQuiz()" class="w-2/3 py-4 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-white font-black rounded-2xl shadow-lg shadow-emerald-600/40 transition cursor-pointer flex items-center justify-center gap-2">
+                    <span>ابدأ التحدي</span> <i class="fa-solid fa-arrow-left text-xs"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- ==================== SCREEN 3: QUIZ ==================== -->
+        <div id="screen-quiz" class="flex-1 flex flex-col justify-between p-4 sm:p-6 overflow-y-auto hidden">
+            <!-- Top Status Bar -->
+            <div>
+                <div class="flex items-center justify-between mb-3 bg-slate-900/90 p-3 rounded-2xl border border-slate-800 shadow-sm">
+                    <div class="flex items-center gap-2">
+                        <span class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-black text-xs" id="current-q-num">1</span>
+                        <span class="text-xs sm:text-sm text-slate-400 font-semibold">من <span id="total-q-num">20</span> سؤال</span>
+                    </div>
+                    <div class="flex items-center gap-1.5 bg-amber-500/10 border border-amber-500/30 px-3 py-1 rounded-full">
+                        <i class="fa-solid fa-star text-amber-400 text-xs"></i>
+                        <span class="text-xs font-bold text-amber-300" id="current-score-display">النقاط: 0</span>
+                    </div>
+                </div>
+
+                <!-- Category Badge -->
+                <div class="mb-3 text-center">
+                    <span id="quiz-category-badge" class="inline-block bg-emerald-950/80 border border-emerald-500/30 text-emerald-300 text-xs px-3.5 py-1 rounded-full font-bold shadow-sm">
+                        القرآن الكريم وعلومه
+                    </span>
+                </div>
+
+                <!-- Question Box -->
+                <div class="bg-slate-900/95 border border-slate-800 p-4 sm:p-5 rounded-2xl mb-4 shadow-md">
+                    <h3 id="question-text" class="text-base sm:text-lg font-bold text-white text-center leading-relaxed">
+                        ما هي السورة التي لُقبت بـ "سنام القرآن"؟
+                    </h3>
+                </div>
+            </div>
+
+            <!-- Options Grid -->
+            <div id="options-container" class="grid grid-cols-1 gap-2.5 my-auto">
+                <!-- Dynamically populated options -->
+            </div>
+
+            <!-- Next Button Area -->
+            <div id="next-btn-container" class="mt-4 hidden pb-2">
+                <button onclick="nextQuestion()" class="w-full py-4 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 text-white font-black rounded-2xl shadow-lg shadow-emerald-600/40 transition flex items-center justify-center gap-2 cursor-pointer">
+                    <span>السؤال التالي</span> <i class="fa-solid fa-arrow-left"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- ==================== SCREEN 4: END & RESULTS ==================== -->
+        <div id="screen-end" class="flex-1 flex flex-col items-center justify-between p-6 sm:p-10 text-center overflow-y-auto hidden">
+            <div class="my-auto flex flex-col items-center w-full max-w-sm">
+                <div class="w-24 h-24 sm:w-28 sm:h-28 bg-amber-500/10 border-2 border-amber-500/40 rounded-full flex items-center justify-center mb-4 text-amber-400 text-4xl animate-bounce shadow-xl">
+                    <i class="fa-solid fa-award"></i>
+                </div>
+                
+                <h2 class="text-2xl sm:text-3xl font-black text-white mb-1">أهلاً بك يا بطل!</h2>
+                <p id="end-player-name" class="text-emerald-400 font-bold text-base mb-4"></p>
+
+                <div class="bg-slate-900 border border-slate-800 p-4 sm:p-5 rounded-2xl w-full mb-4 shadow">
+                    <span class="text-xs text-slate-400 block mb-1 font-semibold">نتيجتك النهائية</span>
+                    <div class="text-3xl sm:text-4xl font-black text-amber-300" id="final-score-text">19/20</div>
+                </div>
+
+                <div class="bg-emerald-950/70 border border-emerald-500/30 p-4 rounded-2xl w-full mb-2">
+                    <p class="text-emerald-300 font-bold text-xs sm:text-sm leading-relaxed">
+                        مع تهنياتنا لك بالنجاح وشكرا
+                    </p>
+                </div>
+            </div>
+
+            <div class="w-full max-w-sm space-y-2.5 pb-2">
+                <button onclick="restartQuiz()" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-2xl shadow-lg shadow-emerald-600/30 transition flex items-center justify-center gap-2 cursor-pointer">
+                    <i class="fa-solid fa-rotate-right"></i> إعادة المسابقة
+                </button>
+                <button onclick="promptLeaderboardPassword()" class="w-full py-3.5 bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-200 font-bold rounded-2xl transition flex items-center justify-center gap-2 cursor-pointer">
+                    <i class="fa-solid fa-lock text-amber-400 text-sm"></i> لوحة الشرف
+                </button>
+            </div>
+        </div>
+
+        <!-- ==================== SCREEN: NUMPAD PASSWORD MODAL ==================== -->
+        <div id="screen-password" class="flex-1 flex flex-col justify-between p-6 overflow-hidden hidden">
+            <div class="flex items-center justify-between mb-2">
+                <h3 class="text-lg font-black text-white flex items-center gap-2">
+                    <i class="fa-solid fa-shield-halved text-amber-400"></i> حماية لوحة الشرف
+                </h3>
+                <button onclick="closePasswordModal()" class="w-8 h-8 bg-slate-900 border border-slate-800 rounded-full flex items-center justify-center text-slate-400 hover:text-white transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="my-auto flex flex-col items-center w-full max-w-xs mx-auto text-center">
+                <p class="text-xs text-slate-300 font-bold mb-4">أدخل كلمة المرور لعرض لوحة الشرف</p>
+                
+                <!-- Password Dots / Display -->
+                <div id="pass-display-box" class="w-full py-3.5 px-4 bg-slate-900 border border-slate-800 rounded-2xl flex items-center justify-center gap-2 mb-2 shadow-inner">
+                    <span id="pass-dots" class="tracking-widest font-mono text-2xl text-amber-400 h-8 flex items-center justify-center"></span>
+                </div>
+                <p id="pass-error" class="text-rose-400 text-xs font-bold min-h-[1rem] opacity-0 transition-opacity">كلمة المرور غير صحيحة!</p>
+
+                <!-- Numpad Grid -->
+                <div class="grid grid-cols-3 gap-2.5 w-full mt-2" dir="ltr">
+                    <button onclick="pressNumpad('1')" class="py-3.5 bg-slate-900 hover:bg-slate-800 active:bg-emerald-600 border border-slate-800/80 rounded-2xl text-xl font-black text-white shadow-sm transition active:scale-95">1</button>
+                    <button onclick="pressNumpad('2')" class="py-3.5 bg-slate-900 hover:bg-slate-800 active:bg-emerald-600 border border-slate-800/80 rounded-2xl text-xl font-black text-white shadow-sm transition active:scale-95">2</button>
+                    <button onclick="pressNumpad('3')" class="py-3.5 bg-slate-900 hover:bg-slate-800 active:bg-emerald-600 border border-slate-800/80 rounded-2xl text-xl font-black text-white shadow-sm transition active:scale-95">3</button>
+                    
+                    <button onclick="pressNumpad('4')" class="py-3.5 bg-slate-900 hover:bg-slate-800 active:bg-emerald-600 border border-slate-800/80 rounded-2xl text-xl font-black text-white shadow-sm transition active:scale-95">4</button>
+                    <button onclick="pressNumpad('5')" class="py-3.5 bg-slate-900 hover:bg-slate-800 active:bg-emerald-600 border border-slate-800/80 rounded-2xl text-xl font-black text-white shadow-sm transition active:scale-95">5</button>
+                    <button onclick="pressNumpad('6')" class="py-3.5 bg-slate-900 hover:bg-slate-800 active:bg-emerald-600 border border-slate-800/80 rounded-2xl text-xl font-black text-white shadow-sm transition active:scale-95">6</button>
+                    
+                    <button onclick="pressNumpad('7')" class="py-3.5 bg-slate-900 hover:bg-slate-800 active:bg-emerald-600 border border-slate-800/80 rounded-2xl text-xl font-black text-white shadow-sm transition active:scale-95">7</button>
+                    <button onclick="pressNumpad('8')" class="py-3.5 bg-slate-900 hover:bg-slate-800 active:bg-emerald-600 border border-slate-800/80 rounded-2xl text-xl font-black text-white shadow-sm transition active:scale-95">8</button>
+                    <button onclick="pressNumpad('9')" class="py-3.5 bg-slate-900 hover:bg-slate-800 active:bg-emerald-600 border border-slate-800/80 rounded-2xl text-xl font-black text-white shadow-sm transition active:scale-95">9</button>
+                    
+                    <button onclick="clearNumpad()" class="py-3.5 bg-slate-900/80 hover:bg-slate-800 border border-slate-800 text-rose-400 font-bold rounded-2xl text-sm transition active:scale-95 flex items-center justify-center">مسح</button>
+                    <button onclick="pressNumpad('0')" class="py-3.5 bg-slate-900 hover:bg-slate-800 active:bg-emerald-600 border border-slate-800/80 rounded-2xl text-xl font-black text-white shadow-sm transition active:scale-95">0</button>
+                    <button onclick="backspaceNumpad()" class="py-3.5 bg-slate-900/80 hover:bg-slate-800 border border-slate-800 text-amber-400 font-bold rounded-2xl text-sm transition active:scale-95 flex items-center justify-center"><i class="fa-solid fa-delete-left text-lg"></i></button>
+                </div>
+            </div>
+
+            <button onclick="submitPassword()" class="w-full py-3.5 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 text-white font-black text-base rounded-2xl shadow-lg transition active:scale-95">
+                تأكيد الدخول
+            </button>
+        </div>
+
+        <!-- ==================== SCREEN 5: LEADERBOARD ==================== -->
+        <div id="screen-leaderboard" class="flex-1 flex flex-col justify-between p-5 sm:p-6 overflow-hidden hidden">
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-trophy text-amber-400 text-xl"></i>
+                    <h2 class="text-lg sm:text-xl font-black text-white">لوحة الشرف</h2>
+                </div>
+                <button onclick="closeLeaderboard()" class="w-9 h-9 bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded-full flex items-center justify-center text-slate-300 transition cursor-pointer">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <p class="text-xs text-slate-400 mb-3 text-right">أفضل النتائج المسجلة (الاسم : النتيجة):</p>
+
+            <div id="leaderboard-list" class="flex-1 space-y-2.5 overflow-y-auto mb-4 pr-1">
+                <!-- Populated via JS -->
+            </div>
+
+            <button onclick="closeLeaderboard()" class="w-full py-3.5 bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-200 font-bold rounded-xl transition cursor-pointer">
+                العودة
+            </button>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
